@@ -1,7 +1,6 @@
 """
 Pandoc filter to apply mustache templates on regular text.
 """
-from past.builtins import basestring
 from panflute import *
 import chevron, yaml
 
@@ -10,7 +9,7 @@ def prepare(doc):
         then load those templates.
     """
     doc.mustache_files = doc.get_metadata('mustache')
-    if isinstance(doc.mustache_files, basestring):  # process single YAML value stored as string
+    if isinstance(doc.mustache_files, str):  # process single YAML value stored as string
         if not doc.mustache_files:
             doc.mustache_files = None  # switch empty string back to None
         else:
