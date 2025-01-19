@@ -37,11 +37,11 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/michaelstepner/pandoc-mustache/',
+    url='https://github.com/copart/pandoc-mustache/',
 
     # Author details
-    author="Michael Stepner",
-    author_email='stepner@mit.edu',
+    author="Steve Miller",
+    author_email='code@rellims.com',
 
     # Choose your license
     license='CC0-1.0',
@@ -68,8 +68,6 @@ setup(
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
         # https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
@@ -96,9 +94,8 @@ setup(
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
         'panflute',
-        'pystache',
-        'pyyaml',
-        'future'
+        'chevron',
+        'pyyaml'
     ],
 
     # List additional groups of dependencies here (e.g. development

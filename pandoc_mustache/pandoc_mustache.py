@@ -3,7 +3,7 @@ Pandoc filter to apply mustache templates on regular text.
 """
 from past.builtins import basestring
 from panflute import *
-import pystache, yaml
+import chevron, yaml
 
 def prepare(doc):
     """ Parse metadata to obtain list of mustache templates,
@@ -25,8 +25,11 @@ def prepare(doc):
         doc.mhash = {}
     if len(doc.metadata.content) > 0:
         # Local variables in markdown file wins over any contained in mustache_files
+        # doc.mhash.update({ k: doc.get_metadata(k) for k in doc.metadata.content })
+        # doc.mrenderer = pystache.Renderer(escape=lambda u: u, missing_tags='strict')
+        # Local variables in markdown file wins over any contained in mustache_files
         doc.mhash.update({ k: doc.get_metadata(k) for k in doc.metadata.content })
-        doc.mrenderer = pystache.Renderer(escape=lambda u: u, missing_tags='strict')
+        # No need for the renderer here anymore as chevron handles it directly
     else:
         doc.mhash = None
 
@@ -34,7 +37,8 @@ def action(elem, doc):
     """ Apply combined mustache template to all strings in document.
     """
     if type(elem) in (Str, CodeBlock, Code, RawBlock) and doc.mhash is not None:
-        elem.text = doc.mrenderer.render(elem.text, doc.mhash)
+        # elem.text = doc.mrenderer.render(elem.text, doc.mhash)
+        elem.text = chevron.render(elem.text, doc.mhash)
         return elem
 
 def main(doc=None):

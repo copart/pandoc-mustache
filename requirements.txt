@@ -1,4 +1,3 @@
 panflute
-pystache
+chevron
 pyyaml
-future
